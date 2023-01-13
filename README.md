@@ -60,7 +60,7 @@
 
 > This project is a React Single Page App.
 > In this project you can find calculator to perform calculation.
->
+> This project is using Big.js library to calculate calculation with minimal code.
 > This project is using best practices with React and JavaScript.
 > This project follows the gitflow convention.
 > This is using eslint and stylelint to check errors.
