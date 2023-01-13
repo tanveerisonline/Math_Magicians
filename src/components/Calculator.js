@@ -2,61 +2,62 @@
 /* eslint-disable no-useless-constructor */
 
 import './styles/Calculator.css';
-import React from 'react';
+import React, { useState } from 'react';
 import calculate from './logic/CalculatorLogic';
 import Result from './Result';
 import Button from './Button';
 
-class Calculator extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { output: '0' };
-    this.obj = {};
-  }
+let obj = {};
 
-  handleButtonClick = (buttonName) => {
-    this.obj = calculate(this.obj, buttonName);
+const Calculator = () => {
+  const [output, setOutput] = useState(0);
 
-    if (this.obj.operation && !this.obj.next) {
-      this.setState({ output: this.obj.operation });
-    } else if (this.obj.next) {
-      this.setState({ output: this.obj.next });
-    } else if (this.obj.total) {
-      this.setState({ output: this.obj.total });
-    } else {
-      this.setState({ output: 0 });
+  const handleButtonClick = (buttonName) => {
+    obj = calculate(obj, buttonName);
+
+    let outStr = '';
+    if (obj.total) {
+      outStr += obj.total;
     }
-  }
+    if (obj.operation) {
+      outStr += obj.operation;
+    }
+    if (obj.next) {
+      outStr += obj.next;
+    }
+    if (outStr === '') {
+      outStr += '0';
+    }
 
-  render() {
-    const { output } = this.state;
-    return (
-      <div className="calculator">
-        <Result output={output} />
-        <div className="numbers-oberations">
-          <Button handleButtonClick={this.handleButtonClick} className="" buttonName="AC" />
-          <Button handleButtonClick={this.handleButtonClick} className="" buttonName="+/-" />
-          <Button handleButtonClick={this.handleButtonClick} className="" buttonName="%" />
-          <Button handleButtonClick={this.handleButtonClick} className="last" buttonName="&divide;" />
-          <Button handleButtonClick={this.handleButtonClick} className="" buttonName="7" />
-          <Button handleButtonClick={this.handleButtonClick} className="" buttonName="8" />
-          <Button handleButtonClick={this.handleButtonClick} className="" buttonName="9" />
-          <Button handleButtonClick={this.handleButtonClick} className="last" buttonName="x" />
-          <Button handleButtonClick={this.handleButtonClick} className="" buttonName="4" />
-          <Button handleButtonClick={this.handleButtonClick} className="" buttonName="5" />
-          <Button handleButtonClick={this.handleButtonClick} className="" buttonName="6" />
-          <Button handleButtonClick={this.handleButtonClick} className="last" buttonName="-" />
-          <Button handleButtonClick={this.handleButtonClick} className="" buttonName="1" />
-          <Button handleButtonClick={this.handleButtonClick} className="" buttonName="2" />
-          <Button handleButtonClick={this.handleButtonClick} className="" buttonName="3" />
-          <Button handleButtonClick={this.handleButtonClick} className="last" buttonName="+" />
-          <Button handleButtonClick={this.handleButtonClick} className="zero-btn" buttonName="0" />
-          <Button handleButtonClick={this.handleButtonClick} className="" buttonName="." />
-          <Button handleButtonClick={this.handleButtonClick} className="last" buttonName="=" />
-        </div>
+    setOutput(outStr);
+  };
+
+  return (
+    <div className="calculator">
+      <Result output={output} />
+      <div className="numbers-oberations">
+        <Button handleButtonClick={handleButtonClick} className="" buttonName="AC" />
+        <Button handleButtonClick={handleButtonClick} className="" buttonName="+/-" />
+        <Button handleButtonClick={handleButtonClick} className="" buttonName="%" />
+        <Button handleButtonClick={handleButtonClick} className="last" buttonName="÷" />
+        <Button handleButtonClick={handleButtonClick} className="" buttonName="7" />
+        <Button handleButtonClick={handleButtonClick} className="" buttonName="8" />
+        <Button handleButtonClick={handleButtonClick} className="" buttonName="9" />
+        <Button handleButtonClick={handleButtonClick} className="last" buttonName="x" />
+        <Button handleButtonClick={handleButtonClick} className="" buttonName="4" />
+        <Button handleButtonClick={handleButtonClick} className="" buttonName="5" />
+        <Button handleButtonClick={handleButtonClick} className="" buttonName="6" />
+        <Button handleButtonClick={handleButtonClick} className="last" buttonName="-" />
+        <Button handleButtonClick={handleButtonClick} className="" buttonName="1" />
+        <Button handleButtonClick={handleButtonClick} className="" buttonName="2" />
+        <Button handleButtonClick={handleButtonClick} className="" buttonName="3" />
+        <Button handleButtonClick={handleButtonClick} className="last" buttonName="+" />
+        <Button handleButtonClick={handleButtonClick} className="zero-btn" buttonName="0" />
+        <Button handleButtonClick={handleButtonClick} className="" buttonName="." />
+        <Button handleButtonClick={handleButtonClick} className="last" buttonName="=" />
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
-export default Calculator;
+export { Calculator as default };

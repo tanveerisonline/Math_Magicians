@@ -1,16 +1,18 @@
 /* eslint-disable react/prefer-stateless-function */
 import React from 'react';
+import PropTypes from 'prop-types';
 
-class Result extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+const Result = (props) => {
+  const { output } = props;
+  return <div className="result">{output}</div>;
+};
 
-  render() {
-    // eslint-disable-next-line react/prop-types
-    const { output } = this.props;
-    return <div className="result">{output}</div>;
-  }
-}
+Result.defaultProps = {
+  output: '0',
+};
 
-export default Result;
+Result.propTypes = {
+  output: PropTypes.string,
+};
+
+export { Result as default };
