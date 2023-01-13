@@ -32,7 +32,7 @@
   background-color: #f5913e;
 }
 
-.show_result {
+.result {
   width: calc(100% - 20px);
   background-color: #858694;
   display: flex;
